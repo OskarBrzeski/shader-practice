@@ -44,10 +44,12 @@ int main() {
                    (Vector2){0, 0}, 0, BLACK);
     EndShaderMode();
 
+    draw_points(points);
     DrawFPS(0, 0);
     EndDrawing();
 
     time += GetFrameTime();
+    move_points(points, time);
   }
 
   CloseWindow();
