@@ -23,9 +23,10 @@ int main() {
   int time_loc = GetShaderLocation(shader, "time");
   int point1_loc = GetShaderLocation(shader, "point1");
   int point2_loc = GetShaderLocation(shader, "point2");
+  int point3_loc = GetShaderLocation(shader, "point3");
 
   float time = 0.0;
-  Vector2 points[2];
+  Vector2 points[3];
   init_points(points);
 
   Texture t = get_default_texture();
@@ -37,11 +38,14 @@ int main() {
     SetShaderValue(shader, time_loc, &time, SHADER_UNIFORM_FLOAT);
     SetShaderValue(shader, point1_loc, &points[0], SHADER_UNIFORM_VEC2);
     SetShaderValue(shader, point2_loc, &points[1], SHADER_UNIFORM_VEC2);
+    SetShaderValue(shader, point3_loc, &points[2], SHADER_UNIFORM_VEC2);
 
     BeginShaderMode(shader);
     DrawTexturePro(t, (Rectangle){0, 0, 1, 1},
                    (Rectangle){0, 0, WINDOW_WIDTH, WINDOW_HEIGHT},
-                   (Vector2){0, 0}, 0, BLACK);
+                   (Vector2){0, 0}, 0, WHITE);
+    // DrawTriangle(points[0], points[1], points[2], WHITE);
+
     EndShaderMode();
 
     draw_points(points);
@@ -49,7 +53,6 @@ int main() {
     EndDrawing();
 
     time += GetFrameTime();
-    move_points(points, time);
   }
 
   CloseWindow();
